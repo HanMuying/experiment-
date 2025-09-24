@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 1. 优先设置字符编码，确保中文正常显示（必须放在<head>最顶部） -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="沐樱的个人网站，分享生活与兴趣">
     <meta name="keywords" content="沐樱, 个人网站, 兴趣分享">
     <meta name="author" content="沐樱">
     
-    <!-- 外部资源 -->
+    <!-- 2. 修复Font Awesome图标链接（原链接可能存在CDN失效问题，替换为官方稳定链接） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
     <!-- Tailwind 配置 -->
     <script>
@@ -23,8 +24,8 @@
                         dark: '#424242', // 深灰色
                     },
                     fontFamily: {
-                        sans: ['Noto Sans SC', 'sans-serif'],
-                        serif: ['Noto Serif SC', 'serif'],
+                        sans: ['"Noto Sans SC"', 'sans-serif'], // 明确指定中文字体，避免系统字体缺失导致乱码
+                        serif: ['"Noto Serif SC"', 'serif'],
                     },
                 }
             }
@@ -43,6 +44,11 @@
             .transition-navbar {
                 transition: background-color 0.3s, padding 0.3s, box-shadow 0.3s;
             }
+        }
+        
+        /* 3. 强制设置全局字体，兜底解决中文乱码 */
+        body {
+            font-family: "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif !important;
         }
     </style>
     
@@ -78,6 +84,7 @@
                 <li><a href="#" class="block px-4 py-3 hover:bg-primary/10 transition-colors">关于我们</a></li>
                 <li><a href="#" class="block px-4 py-3 hover:bg-primary/10 transition-colors">联系我们</a></li>
                 <li><a href="Dodge the Ice Cubes/Dodge the Ice Cubes.html" class="block px-4 py-3 hover:bg-primary/10 transition-colors">
+                    <i class="fa fa-snowflake-o mr-1"></i>躲避冰块
                 </a></li>
             </ul>
         </div>
@@ -115,6 +122,7 @@
                             <h4 class="text-xl font-bold mb-3 text-primary">生活记录</h4>
                             <p class="text-gray-600 mb-4">分享日常点滴、旅行见闻和生活感悟，记录美好的瞬间。</p>
                             <a href="#" class="inline-block text-primary font-medium hover:text-primary/80 transition-colors">
+                                查看更多 <i class="fa fa-arrow-right ml-1"></i>
                             </a>
                         </div>
                     </div>
@@ -128,11 +136,12 @@
                             <h4 class="text-xl font-bold mb-3 text-primary">兴趣爱好</h4>
                             <p class="text-gray-600 mb-4">展示我的各种爱好，包括绘画、音乐、阅读等，交流心得体会。</p>
                             <a href="#" class="inline-block text-primary font-medium hover:text-primary/80 transition-colors">
+                                查看更多 <i class="fa fa-arrow-right ml-1"></i>
                             </a>
                         </div>
                     </div>
                     
-                    <!-- 特色卡片3 - 保留游戏入口 -->
+                    <!-- 特色卡片3 -->
                     <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
                         <div class="h-48 overflow-hidden">
                             <img src="https://picsum.photos/seed/game/600/400" alt="小游戏" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
@@ -141,6 +150,7 @@
                             <h4 class="text-xl font-bold mb-3 text-primary">互动游戏</h4>
                             <p class="text-gray-600 mb-4">精心制作的小游戏，包括"躲避冰块"等，休闲娱乐的好去处。</p>
                             <a href="Dodge the Ice Cubes/Dodge the Ice Cubes.html" class="inline-block text-primary font-medium hover:text-primary/80 transition-colors">
+                                开始游戏 <i class="fa fa-gamepad ml-1"></i>
                             </a>
                         </div>
                     </div>
@@ -156,7 +166,12 @@
                 <div class="bg-white rounded-xl shadow-md p-6 md:p-8">
                     <div class="flex flex-col md:flex-row gap-6 items-center">
                         <div class="w-full md:w-1/3">
-                            <img src="photo1" alt="最新动态图片" class="w-full max-w-lg h-64 md:h-80 object-cover rounded-lg shadow-md mx-auto">
+                            <img 
+                                src="photo1.jpg" 
+                                alt="最新动态图片" 
+                                class="w-full max-w-lg h-64 md:h-80 object-cover rounded-lg shadow-md mx-auto"
+                                onerror="this.src='https://picsum.photos/seed/latest/600/400'; this.onerror=null;"
+                            >
                         </div>
                         <div class="w-full md:w-2/3">
                             <span class="inline-block bg-accent text-green-800 text-sm px-3 py-1 rounded-full mb-3">最新更新</span>
@@ -240,7 +255,7 @@
             </div>
             
             <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 沐樱的网站. 保留所有权利.</p>
+                <p>&copy; 2024 沐樱的网站. 保留所有权利.</p>
             </div>
         </div>
     </footer>
@@ -281,11 +296,4 @@
                     });
                     
                     // 关闭移动菜单（如果打开）
-                    document.getElementById('mobile-menu').classList.add('hidden');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
-    
+                    document.getElementById('mobile-menu
